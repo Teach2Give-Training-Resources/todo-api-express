@@ -1,5 +1,7 @@
+import { isAuthenticated } from "../middleware/bearAuth";
 import {
-    createTodoController, getTodoController, getTodoByIdController, updateTodoController, deleteTodoController
+    createTodoController, getTodoController, getTodoByIdController,
+    updateTodoController, deleteTodoController
 } from "./todo.controller";
 
 import { Express } from 'express';
@@ -7,6 +9,7 @@ import { Express } from 'express';
 const todo = (app: Express) => {
     // create todo route
     app.route('/todo').post(
+        isAuthenticated,
         async (req, res, next) => {
             try {
                 await createTodoController(req, res);
@@ -18,6 +21,7 @@ const todo = (app: Express) => {
 
     // get all todos route
     app.route('/todo').get(
+        isAuthenticated,
         async (req, res, next) => {
             try {
                 await getTodoController(req, res);
@@ -29,6 +33,7 @@ const todo = (app: Express) => {
 
     // get todo by id route
     app.route('/todo/:id').get(
+        isAuthenticated,
         async (req, res, next) => {
             try {
                 await getTodoByIdController(req, res);
@@ -40,6 +45,7 @@ const todo = (app: Express) => {
 
     // update todo by id route
     app.route('/todo/:id').put(
+        isAuthenticated,
         async (req, res, next) => {
             try {
                 await updateTodoController(req, res);
@@ -51,6 +57,7 @@ const todo = (app: Express) => {
 
     // delete todo by id route
     app.route('/todo/:id').delete(
+        isAuthenticated,
         async (req, res, next) => {
             try {
                 await deleteTodoController(req, res);
