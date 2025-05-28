@@ -1,5 +1,6 @@
 import {
-    createTodoService, getTodoService, getTodoByIdService, updateTodoService, deleteTodoService
+    createTodoService, getTodoService, getTodoByIdService, updateTodoService,
+    deleteTodoService, getTodosByUserIdService
 } from "./todo.service";
 
 import { Request, Response } from "express";
@@ -113,4 +114,26 @@ export const deleteTodoController = async (req: Request, res: Response) => {
     } catch (error: any) {
         return res.status(500).json({ error: error.message });
     }
+
+}
+
+// get todos by user id controller
+// // get todos by user id controller
+export const getTodosByUserIdController = async (req: Request, res: Response) => {
+    try {
+        const userId = parseInt(req.params.userId);
+        if (isNaN(userId)) {
+            return res.status(400).json({ message: "Invalid User ID" });
+        }
+
+        const todos = await getTodosByUserIdService(userId);
+        if (!todos || todos.length === 0) {
+            return res.status(404).json({ message: "No todos found for this user" });
+        }
+        return res.status(200).json({ data: todos });
+
+    } catch (error: any) {
+        return res.status(500).json({ error: error.message });
+    }
+
 }

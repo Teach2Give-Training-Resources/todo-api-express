@@ -1,6 +1,9 @@
 import { relations } from "drizzle-orm";
+import { pgEnum } from "drizzle-orm/pg-core";
 import { boolean, integer, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
+// Role Enum
+export const RoleEnum = pgEnum("role", ["admin", "user"]);
 
 // users Table
 export const UsersTable = pgTable("users", {
@@ -8,7 +11,8 @@ export const UsersTable = pgTable("users", {
     firstName: varchar("first_name", { length: 50 }).notNull(),
     lastName: varchar("last_name", { length: 50 }).notNull(),
     email: varchar("email", { length: 100 }).notNull().unique(),
-    password: varchar("password", { length: 255 }).notNull()
+    password: varchar("password", { length: 255 }).notNull(),
+    role: RoleEnum("role").default("user"), // default role is user
 })
 
 // todo table

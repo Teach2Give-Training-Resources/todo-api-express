@@ -7,6 +7,7 @@ export const createUserService = async (user: TIUser) => {
     return "User created successfully";
 }
 
+
 export const userLoginService = async (user: TSUser) => {
     const { email } = user;
 
@@ -16,7 +17,8 @@ export const userLoginService = async (user: TSUser) => {
             firstName: true,
             lastName: true,
             email: true,
-            password: true
+            password: true,
+            role: true
         }, where: sql`${UsersTable.email} = ${email}`
     })
 }

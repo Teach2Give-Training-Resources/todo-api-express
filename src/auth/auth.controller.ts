@@ -40,11 +40,24 @@ export const loginUserController = async (req: Request, res: Response) => {
 
         // create a payload for the JWT
         const payload = {
-            sub: userExist.id,
+            sub: userExist.id, //sub means subject, which is the user ID - it helps identify the user
             user_id: userExist.id,
             first_name: userExist.firstName,
             last_name: userExist.lastName,
+            role: userExist.role, // role of the user
             exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 3 // 3 days expiration
+
+            // /1000 converts milliseconds to seconds
+            // +60 - adds 60 seconds - this is for 1 minute
+            // * 60 - adds 60 minutes- this is for 1 hour
+            // * 24 - adds 24 hours - this is for 1 day
+            // * 3 - adds 3 days - this is for 3 days
+
+            // if i was to add it for 1hr, Date.now() / 1000 + 60 * 60
+            // if i was to add it for 1 week, Date.now() / 1000 + 60 * 60 * 24 * 7
+            // // if i was to add it for 1 month, Date.now() / 1000 + 60 * 60 * 24 * 30
+            // adding it for a minute, Date.now() / 1000 + 60
+            // adding for 30 seconds, Date.now() / 1000 + 30
         }
 
         // Generate JWT token

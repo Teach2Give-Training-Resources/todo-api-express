@@ -6,9 +6,9 @@ POST http://localhost:8081/auth/register
 Content-Type: application/json
 
 {
-    "firstName": "Sam",
-    "lastName": "Mwai",
-    "email": "Mwai@gmail..com",
+    "firstName": "test",
+    "lastName": "test",
+    "email": "test@gmail.com",
     "password": "mypassword123"
 }
 
@@ -17,7 +17,7 @@ POST http://localhost:8081/auth/login
 Content-Type: application/json
 
 {
-    "email": "Mwai@gmail.com",
+    "email": "test@gmail.com",
     "password": "mypassword123"
 }
 
@@ -28,7 +28,7 @@ Content-Type: application/json
 {
     "todoName": "Study Node.js",
     "description": "Complete the Node.js course on Udemy",
-    "userId": 2,
+    "userId": 8,
     "dueDate": "2025-09-01",
     "isCompleted": true
 }

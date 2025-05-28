@@ -36,3 +36,11 @@ export const deleteTodoService = async (id: number) => {
     await db.delete(TodoTable).where(eq(TodoTable.id, id)).returning();
     return "Todo deleted successfully";
 }
+
+// todos by user id
+export const getTodosByUserIdService = async (userId: number) => {
+    const todos = await db.query.TodoTable.findMany({
+        where: eq(TodoTable.userId, userId)
+    });
+    return todos;
+}
